@@ -98,9 +98,14 @@ const app = new Vue({
             .listen('ChatEvent', (e) => {
                 this.chat.message.push(e.message);
                 this.chat.user.push(e.user);
-                this.chat.color.push('warning');
                 this.chat.time.push(this.getTime());
-                this.chat.align.push('left');
+                if (Laravel.user == e.user) {
+                    this.chat.color.push('success');
+                    this.chat.align.push('right');
+                } else {
+                    this.chat.color.push('warning');
+                    this.chat.align.push('left');
+                }
                 axios.post('/saveToSession',{
                     chat : this.chat
                 })

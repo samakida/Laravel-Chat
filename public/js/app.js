@@ -25024,9 +25024,14 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         Echo.private('chat').listen('ChatEvent', function (e) {
             _this4.chat.message.push(e.message);
             _this4.chat.user.push(e.user);
-            _this4.chat.color.push('warning');
             _this4.chat.time.push(_this4.getTime());
-            _this4.chat.align.push('left');
+            if (Laravel.user == e.user) {
+                _this4.chat.color.push('success');
+                _this4.chat.align.push('right');
+            } else {
+                _this4.chat.color.push('warning');
+                _this4.chat.align.push('left');
+            }
             axios.post('/saveToSession', {
                 chat: _this4.chat
             }).then(function (response) {}).catch(function (error) {
