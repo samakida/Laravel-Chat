@@ -2,6 +2,7 @@
 Real Time Chat With ***Laravel Broadcast, Pusher and Vuejs***
 
 ![alt text](webchat.gif "ภาพตัวอย่าง")
+![alt text](screenshot.jpg "ภาพตัวอย่าง")
 
 ## ขันตอนการติดตั้ง
 1. composer install
