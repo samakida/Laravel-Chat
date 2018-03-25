@@ -42,7 +42,8 @@ const app = new Vue({
         message(){
             Echo.private('chat')
                 .whisper('typing', {
-                    name: this.message
+                    name: this.message,
+                    who: Laravel.user
                 });
         }
     },
@@ -50,8 +51,8 @@ const app = new Vue({
         send(){
             if (this.message.length != 0) {
                 this.chat.message.push(this.message);
+                this.chat.user.push(Laravel.user);
                 this.chat.color.push('success');
-                this.chat.user.push('Me');
                 this.chat.time.push(this.getTime());
                 this.chat.align.push('right');
                 axios.post('/send', {
@@ -87,7 +88,7 @@ const app = new Vue({
             axios.post('/deleteSession')
             .then(response=> {
                 window.location.assign("/chat");
-                this.$toaster.success('Chat history is deleted');
+                this.$toaster.success('ลบข้อความเรียบร้อย');
         });
         }
     },
@@ -112,7 +113,7 @@ const app = new Vue({
             })
             .listenForWhisper('typing', (e) => {
                 if (e.name != '') {
-                    this.typing = 'กำลังพิมพ์...'
+                    this.typing = e.who+' กำลังพิมพ์...'
                 }else{
                     this.typing = ''
                 }

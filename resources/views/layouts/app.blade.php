@@ -71,5 +71,12 @@
             @yield('content')
         </main>
     </div>
+    @if (Auth::check())
+    <script>
+        window.Laravel = {!! json_encode([
+            'user' => Auth::user()->name,
+        ]) !!};
+    </script>
+    @endif
 </body>
 </html>

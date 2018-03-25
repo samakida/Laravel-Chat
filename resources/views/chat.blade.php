@@ -26,7 +26,7 @@
                 <div class="card-footer text-right">
                     <input type="text" class="form-control" placeholder="พิมพ์ข้อความ..." v-model='message' @keyup.enter='send'>
                     <br>
-                    <a href='' class="btn btn-danger btn-sm" @click.prevent='deleteSession'>Delete Chats</a>
+                    <a href='' class="btn btn-danger btn-sm" @click.prevent='deleteSession'>ลบข้อความ</a>
                 </div>
             </div>
         </div>

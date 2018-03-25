@@ -24966,7 +24966,8 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     watch: {
         message: function message() {
             Echo.private('chat').whisper('typing', {
-                name: this.message
+                name: this.message,
+                who: Laravel.user
             });
         }
     },
@@ -24976,8 +24977,8 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
             if (this.message.length != 0) {
                 this.chat.message.push(this.message);
+                this.chat.user.push(Laravel.user);
                 this.chat.color.push('success');
-                this.chat.user.push('Me');
                 this.chat.time.push(this.getTime());
                 this.chat.align.push('right');
                 axios.post('/send', {
@@ -25012,7 +25013,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
             axios.post('/deleteSession').then(function (response) {
                 window.location.assign("/chat");
-                _this3.$toaster.success('Chat history is deleted');
+                _this3.$toaster.success('ลบข้อความเรียบร้อย');
             });
         }
     },
@@ -25034,7 +25035,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             // console.log(e);
         }).listenForWhisper('typing', function (e) {
             if (e.name != '') {
-                _this4.typing = 'กำลังพิมพ์...';
+                _this4.typing = e.who + ' กำลังพิมพ์...';
             } else {
                 _this4.typing = '';
             }
